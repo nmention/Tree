@@ -13,6 +13,7 @@ public class Test {
 
 
 
+
         //System.out.println(n1);
 
 
@@ -26,14 +27,20 @@ public class Test {
         n1.addChild(n3);
         System.out.println(t1);
 
+        t1.deleteNode(n2);
+        System.out.println(t1);
 
-        System.out.println(n2.isRoot());
+        System.out.println(t1.contains(n3));
+        System.out.println(t1.contains(25));
+
+
+      /*  System.out.println(n2.isRoot());
         System.out.println(n1.isRoot());
 
         System.out.println(n1.getDegree());
         System.out.println(n2.getDegree());
 
-
+*/
 
 
 

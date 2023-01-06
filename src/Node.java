@@ -3,6 +3,32 @@ import java.util.ArrayList;
 public class Node {
     Object label;
     Node parent;
+
+
+    public Node getParent() {
+        return parent;
+    }
+
+    public void setParent(Node parent) {
+        this.parent = parent;
+    }
+
+    public ArrayList<Node> getChildren() {
+        return children;
+    }
+
+    public void setChildren(ArrayList<Node> children) {
+        this.children = children;
+    }
+
+    public Object getLabel() {
+        return label;
+    }
+
+    public void setLabel(Object label) {
+        this.label = label;
+    }
+
     ArrayList<Node> children;
 
 
@@ -50,6 +76,9 @@ public class Node {
 
     public boolean isRoot(){
         return this.parent == null;
+    }
+    public boolean isLeaf(){
+        return this.children.size()==0;
     }
 
     public int getDegree(){
