@@ -33,6 +33,19 @@ public class Tree {
     public String toString() {
        return this.root.toString();
     }
+    public Node addChild(Node parent, Node child){
+        if (!this.contains(parent)){
+            System.out.println("Parent not contained in this tree");
+            return null;
+        }
+        if (this.contains(child)){
+            System.out.println("Child is already contained in this tree");
+            return null;
+        }
+        parent.getChildren().add(child);
+        child.addParent(parent);
+        return child;
+    }
 
 
     public boolean contains(Node node){
@@ -110,6 +123,15 @@ public class Tree {
             return node;
         }
         return null;
+
+    }
+
+
+    public Tree subTree(Node root){
+        if (!this.contains(root)){
+            return null;
+        }
+        return new Tree(root);
 
     }
 
