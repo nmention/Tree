@@ -1,51 +1,23 @@
 public class Test {
+    /**
+     * Class used to test all other classes
+     * @param args
+     */
 
 
     public static void main(String[] args) {
-        Node n1 = new Node("s");
+      Node n1 = new Node(5);
+      BinarySearchTree binarySearchTree = new BinarySearchTree();
+      binarySearchTree.setRoot(n1);
+      binarySearchTree.addChild(n1,new Node(9));
+      binarySearchTree.addChild(n1,new Node(3));
+      binarySearchTree.addChild(n1,new Node(4));
 
-        Node n2 = new Node(5);
-        Node n3 = new Node(true);
+      System.out.println(binarySearchTree);
 
+      System.out.println(binarySearchTree.getNodeByLabel(4));
+      System.out.println(binarySearchTree.getNodeByLabel(9));
 
-        Tree t1 = new Tree(n1);
-        t1.addChild(n1,n2);
-        t1.addChild(new Node(98),n3);
-        t1.addChild(n1,n2);
-        t1.addChild(n1,n3);
-
-
-
-
-
-        //System.out.println(n1);
-
-
-
-
-
-
-
-
-        //System.out.println(n1);
-
-        System.out.println(t1);
-
-        t1.deleteNode(n2);
-        t1.deleteNode(true);
-        System.out.println(t1);
-
-        System.out.println(t1.contains(n3));
-        System.out.println(t1.contains(25));
-
-
-      /*  System.out.println(n2.isRoot());
-        System.out.println(n1.isRoot());
-
-        System.out.println(n1.getDegree());
-        System.out.println(n2.getDegree());
-
-*/
 
 
 

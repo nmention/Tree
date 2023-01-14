@@ -1,14 +1,22 @@
+/**
+ * represents a Tree data structure. It only possess a root node
+ */
 public class Tree {
 
     private Node root;
 
 
-
+    /**
+     * constructor
+     */
     public Tree(){
         this(null);
     }
 
-
+    /**
+     * constructor
+     * @param root
+     */
     public Tree(Node root) {
         this.root = root;
     }
@@ -33,21 +41,38 @@ public class Tree {
     public String toString() {
        return this.root.toString();
     }
-    public Node addChild(Node parent, Node child){
+
+    /**
+     * Addition of a child Node into the Tree
+     * @param parent Node parent to future child to be added
+     * @param child Node to be added into this Tree
+     */
+    public void addChild(Node parent, Node child){
+
         if (!this.contains(parent)){
             System.out.println("Parent not contained in this tree");
-            return null;
+            return;
+
         }
         if (this.contains(child)){
             System.out.println("Child is already contained in this tree");
-            return null;
+            return;
+
         }
-        parent.getChildren().add(child);
-        child.addParent(parent);
-        return child;
+        if (this.childrenLimits(parent)){
+            parent.getChildren().add(child);
+            child.addParent(parent);
+        }
+
+
+
     }
 
-
+    /**
+     *
+     * @param node Node to be searched for in the Graph
+     * @return true if node is present
+     */
     public boolean contains(Node node){
         if (this.root == null){
             return false;
@@ -73,6 +98,11 @@ public class Tree {
         return false;
     }
 
+    /**
+     *
+     * @param object Object contained by a Node
+     * @return true if Node containing said object is present in this Tree
+     */
     public boolean contains(Object object){
         if (this.root == null){
             return false;
@@ -100,12 +130,18 @@ public class Tree {
 
     }
 
+    /**
+     * Allow to get a Node of this Tree by its label
+     * @param label Object contained by the Node
+     * @return Node or null if no Nodes of this label has been found
+     */
     public Node getNodeByLabel(Object label){
         Node result = null;
         if (this.root.getLabel().equals(label)){
             return this.root;
         }
         for (Node n : this.root.getChildren()){
+
             if (n.getLabel().equals(label)){
                 return n;
             }
@@ -113,20 +149,39 @@ public class Tree {
         return result;
     }
 
-
-    public Node deleteNode(Node node){
+    /**
+     * Allows to delete a Node of this Tree. Reorganize the Tree if needed
+     * @param node Node to be deleted
+     */
+    public void deleteNode(Node node){
         if (!this.contains(node)){
-            return null;
+            return;
         }
         if (node.isLeaf()){
             node.parent.children.remove(node);
-            return node;
+
+
         }
-        return null;
+        else {
+            if (!node.isRoot()){
+                node.getParent().getChildren().addAll(node.getChildren());
+                node.getParent().getChildren().remove(node);
+
+                for (Node n : node.getChildren()){
+                    n.setParent(node.getParent());
+                }
+            }
+
+        }
+
 
     }
 
-
+    /**
+     * Creates a subTree based of a designated Node
+     * @param root Node used to construct subTree
+     * @return new subTree
+     */
     public Tree subTree(Node root){
         if (!this.contains(root)){
             return null;
@@ -136,15 +191,26 @@ public class Tree {
     }
 
 
-
-    public Node deleteNode(Object object){
+    /**
+     * Allows the deletion of a Node identified by its label
+     * @param object Object contained by a Node of this Tree
+     */
+    public void deleteNode(Object object){
         if (!this.contains(object)){
-            return null;
+            System.out.println("No such node in " + getClass().getSimpleName());
+            return;
         }
         Node target = this.getNodeByLabel(object);
-        if (target.isLeaf()){
-            target.getParent().getChildren().remove(target);
-        }
-        return null;
+        deleteNode(target);
+
+    }
+
+    /**
+     * Set the number of children allowed per Node. This is mainly used in subclasses
+     * @param parent Node taken into account
+     * @return true (always)
+     */
+    public boolean childrenLimits(Node parent){
+        return true;
     }
 }
