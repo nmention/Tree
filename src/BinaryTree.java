@@ -1,5 +1,5 @@
 /**
- * Represents Binary Tree data structure
+ * Represents Binary Tree data structure / only allows 2 children per Node
  */
 public class BinaryTree extends Tree{
 

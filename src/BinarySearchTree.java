@@ -1,3 +1,6 @@
+/**
+ * Represents BinarySearchTree data structure where nodes are ordered relatively
+ */
 public class BinarySearchTree extends BinaryTree{
 
 

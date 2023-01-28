@@ -49,7 +49,7 @@ public class Tree {
      */
     public void addChild(Node parent, Node child){
 
-        if (!this.contains(parent)){
+        /*if (!this.contains(parent)){
             System.out.println("Parent not contained in this tree");
             return;
 
@@ -58,7 +58,7 @@ public class Tree {
             System.out.println("Child is already contained in this tree");
             return;
 
-        }
+        }*/
         if (this.childrenLimits(parent)){
             parent.getChildren().add(child);
             child.addParent(parent);
@@ -212,5 +212,26 @@ public class Tree {
      */
     public boolean childrenLimits(Node parent){
         return true;
+    }
+
+    public boolean containing(Node node){
+        if (this.root == null){
+            return false;
+        }
+        if (this.root == node){
+            return true;
+        }
+        /*if (this.root.children == null)
+        {
+            return false;
+        }*/
+
+        for (Node n : this.root.getChildren()){
+            if (subTree(n).containing(node)){
+                break;
+            }
+        }
+        return false;
+
     }
 }
